@@ -81,13 +81,13 @@
 
 <meta name="description" content="在读研究生">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Bananana&#39;bolg">
+<meta property="og:title" content="Bananana&#39;blog">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Bananana&#39;bolg">
+<meta property="og:site_name" content="Bananana&#39;blog">
 <meta property="og:description" content="在读研究生">
 <meta property="og:locale" content="zh-hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bananana&#39;bolg">
+<meta name="twitter:title" content="Bananana&#39;blog">
 <meta name="twitter:description" content="在读研究生">
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <title>Bananana'bolg</title>
+  <title>Bananana'blog</title>
   
 
 
@@ -155,7 +155,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Bananana'bolg</span>
+        <span class="site-title">Bananana'blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -241,7 +241,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bananana'bolg">
+      <meta itemprop="name" content="Bananana'blog">
     </span>
 
     
@@ -303,14 +303,14 @@
       
         
           
-            <h1 id="Detection-and-Separation-of-Smoke-From-Single-Image-Frames"><a href="#Detection-and-Separation-of-Smoke-From-Single-Image-Frames" class="headerlink" title="Detection and Separation of Smoke From Single Image Frames"></a>Detection and Separation of Smoke From Single Image Frames</h1><p>从单帧图像中检测和分离烟雾</p>
+            <h1 id="【论文笔记】Detection-and-Separation-of-Smoke-From-Single-Image-Frames"><a href="#【论文笔记】Detection-and-Separation-of-Smoke-From-Single-Image-Frames" class="headerlink" title="【论文笔记】Detection and Separation of Smoke From Single Image Frames"></a>【论文笔记】Detection and Separation of Smoke From Single Image Frames</h1><p>从单帧图像中检测和分离烟雾</p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出一种从单帧图像中检测和分离烟雾的新方法，具体地说，在大气散射模型的基础上，推导了一种成像模型。将框架分离为拟烟分量和拟背景分量，并将其表示为凸优化，分别利用烟雾分量和背景分量的对偶字典求解稀疏表示问题。提出了一种基于稀疏系数级联的特征检测方法。此外，提出了一种基于抠图的方法，将真实烟雾和背景成分从烟雾检测结果中分离出来。大量的检测实验表明，提出的特征明显优于现有的烟雾检测特征。特别地，该方法能够在灰度框架中区分具有相似视觉外观的其他具有挑战性的对象(如雾/霾、云等)。烟气分离实验也证明了该方法的有效性。</p>
 <h2 id="3-SMOKE-DETECTION-BY-DUAL-DICTIONARY-MODELING"><a href="#3-SMOKE-DETECTION-BY-DUAL-DICTIONARY-MODELING" class="headerlink" title="3.SMOKE  DETECTION  BY  DUAL-DICTIONARY  MODELING"></a>3.SMOKE  DETECTION  BY  DUAL-DICTIONARY  MODELING</h2><p>烟雾检测的对偶字典模型</p>
-<h3 id="A-Physics-Based-Image-Formation-Model-基于物理的图像形成模型"><a href="#A-Physics-Based-Image-Formation-Model-基于物理的图像形成模型" class="headerlink" title="A. Physics-Based Image Formation Model 基于物理的图像形成模型"></a>A. Physics-Based Image Formation Model 基于物理的图像形成模型</h3><p><img src="D:/csx/%E7%AC%94%E8%AE%B0/h23sss@163.com/91328db85d3f4bfbbea7c7834a2d6762/clipboard.png" alt="img"></p>
+<h3 id="A-Physics-Based-Image-Formation-Model-基于物理的图像形成模型"><a href="#A-Physics-Based-Image-Formation-Model-基于物理的图像形成模型" class="headerlink" title="A. Physics-Based Image Formation Model 基于物理的图像形成模型"></a>A. Physics-Based Image Formation Model 基于物理的图像形成模型</h3><p>![img]<br><a href="http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard.png" target="_blank" rel="noopener">http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard.png</a></p>
 <p>这个是基于物理的模型，参数很多，不是很重要，B(x)是背景或称无烟雾部分，S(x)是前景的烟雾。</p>
 <p>Ω与烟雾的厚度z有关，越厚越大，在0-1之间。</p>
 <p>这篇论文重在检测烟雾，是对烟雾分析而不是单纯去雾。</p>
-<h3 id="B-Smoke-Detection-on-Block-Level-块级烟雾检测"><a href="#B-Smoke-Detection-on-Block-Level-块级烟雾检测" class="headerlink" title="B.Smoke Detection on Block Level 块级烟雾检测"></a>B.Smoke Detection on Block Level 块级烟雾检测</h3><p><img src="D:/csx/%E7%AC%94%E8%AE%B0/h23sss@163.com/890b1b83db2a49099010bb82264f83aa/clipboard.png" alt="img"></p>
+<h3 id="B-Smoke-Detection-on-Block-Level-块级烟雾检测"><a href="#B-Smoke-Detection-on-Block-Level-块级烟雾检测" class="headerlink" title="B.Smoke Detection on Block Level 块级烟雾检测"></a>B.Smoke Detection on Block Level 块级烟雾检测</h3><p><a href="http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard1.png" target="_blank" rel="noopener">http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard1.png</a></p>
 <p>A中的模型可简化为这个等式，其中n为噪声，f是由N个像素点组成的块，b和s对应背景和烟雾部分。</p>
 <p>原问题是为了求得b和s，可以表示为以下优化问题，求解噪声的平方和最小。</p>
 <ul>
@@ -401,7 +401,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bananana'bolg">
+      <meta itemprop="name" content="Bananana'blog">
     </span>
 
     
