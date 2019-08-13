@@ -232,6 +232,291 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/Distort-and-Recover-Color-Enhancement-using-Deep-Reinforcement-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bananana'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/01/Distort-and-Recover-Color-Enhancement-using-Deep-Reinforcement-Learning/" itemprop="url">Distort-and-Recover: Color Enhancement using Deep Reinforcement Learning</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-01T10:35:06+08:00">
+                2019-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="【论文笔记】Distort-and-Recover-Color-Enhancement-using-Deep-Reinforcement-Learning"><a href="#【论文笔记】Distort-and-Recover-Color-Enhancement-using-Deep-Reinforcement-Learning" class="headerlink" title="【论文笔记】Distort-and-Recover: Color Enhancement using Deep Reinforcement Learning"></a>【论文笔记】Distort-and-Recover: Color Enhancement using Deep Reinforcement Learning</h3><p><img src="http://pveky4pnl.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20190801174928.jpg" alt="img"></p>
+<p>七个问题</p>
+<ol>
+<li><p>*<em>他的action是什麼？有幾種？ *</em></p>
+<p> the action space is the set of color adjustment operations A</p>
+<p>行动action是颜色调整操作的集合，共12种</p>
+<p><img src="http://pveky4pnl.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20190801173430.jpg" alt="action"></p>
+</li>
+<li><p><strong>他的state是什麼？next state是什麼？</strong></p>
+<p>We represent an image I(t) at a step t using a contextual feature F context (I(t)) and a global color feature F color (I(t)).</p>
+<p>the state S is a combination of the contextual feature and the color feature (F context ,F color )</p>
+<p>第T步的图像可以表示为上下文和整合颜色特征，状态s为两者的结合。</p>
+</li>
+<li><p><strong>網路怎麼進行學習？下個世代的ground-truth目標是什麼？</strong></p>
+<p>agent网络的优化算法是Adam，目标是12个action对应的值，计算估计值，选择最高的为正的action的值，后对image操作完，求和target图片的二范数距离，和上一步的距离相减作为R值，用于训练网络</p>
+</li>
+<li><p><strong>網路架構是什麼？輸入什麼？輸出是什麼？</strong></p>
+<p>全部的算法架构见Fig2 ，agent网络由四个全连接层组成，每层的输出是4096,4096,512,12，所以最后的输出对应12个action的选择，输入就是state</p>
+</li>
+<li><p><strong>done怎麼決定？也就是停止條件是什麼？</strong></p>
+<p>The agent then chooses an action that has the highest action value and applies the action to the input image if the value is positive. The agent repeats this process and stops when all estimated action values are negative.</p>
+<p>算法选择最高的action作为下一步的操作，当所有的action的值为负时停止</p>
+</li>
+<li><p><strong>訓練的時候，一張圖要跑幾次？測試的時候呢？跑幾次？</strong></p>
+<p>最大步数是3000000，测试和训练步数一致，（不太确定。。。）</p>
+</li>
+<li><p>*<em>測試的時候，是否每次run結果都不一樣？也就是每次的預測結果都不同？ *</em></p>
+<p>因为有epsilon值，所以应该是会有随机结果产生的。。。。还不是很明白，此外ep值是由步数决定</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> self.step&lt;<span class="number">10000</span>:ep = <span class="number">1.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> self.step&lt;<span class="number">40000</span>:ep = <span class="number">0.8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> self.step&lt;<span class="number">80000</span>:ep = <span class="number">0.6</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> self.step&lt;<span class="number">160000</span>:ep=<span class="number">0.4</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> self.step&lt;<span class="number">320000</span>:ep=<span class="number">0.2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:ep=<span class="number">0.1</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/Detail-enhanced Multi-scale Exposure Fusion in YUV space/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bananana'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/19/Detail-enhanced Multi-scale Exposure Fusion in YUV space/" itemprop="url">Detail-enhanced Multi-scale Exposure Fusion in YUV Color Space</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-19T15:13:09+08:00">
+                2019-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="【论文笔记】Detail-enhanced-Multi-scale-Exposure-Fusion-in-YUV-Color-Space"><a href="#【论文笔记】Detail-enhanced-Multi-scale-Exposure-Fusion-in-YUV-Color-Space" class="headerlink" title="【论文笔记】Detail-enhanced Multi-scale Exposure Fusion in YUV Color Space"></a>【论文笔记】Detail-enhanced Multi-scale Exposure Fusion in YUV Color Space</h1><p>在YUV颜色空间中的细节提取的多尺度曝光融合</p>
+<p><a href="https://github.com/h23sss/YUV-Multi-scale-Exposure-Fusion" title="YUV" target="_blank" rel="noopener">github代码</a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>利用边缘保持平滑技术对现有的多尺度曝光融合算法进行了改进。然而，基于边缘保持平滑的多尺度曝光融合是移动设备面临的一个难题。本文在YUV颜色空间中设计了一种简单的多尺度曝光融合算法。该算法既能在高动态范围(HDR)场景最亮和最暗的区域保留细节，又能在融合图像中避免颜色失真的同时，实现基于边缘保持平滑的多尺度曝光融合算法。该算法的复杂度约为基于边缘保持平滑的多尺度曝光融合算法的一半。因此，该算法比基于边缘保持平滑的多尺度曝光融合算法更适合智能手机。此外，提出了一种简单的细节增强组件来增强融合图像的精细细节。实验结果表明，所提出的组件可以产生具有明显增强的精细细节和较高的MEF-SSIM值的增强图像。这对于现有的细节增强组件是不可能的。显然，该组件对基于PC的应用程序很有吸引力。</p>
+<h2 id="I-INTRODUCTION"><a href="#I-INTRODUCTION" class="headerlink" title="I.  INTRODUCTION"></a>I.  INTRODUCTION</h2><p>主要讲这几件事</p>
+<ol>
+<li>多尺度曝光融合优于单尺度（保持对比度），本文方法是基于Single-scale fusion: An effective approach to merging images这篇文章的算法（这篇是单尺度，效果很好）</li>
+<li>在YUV中实现更佳，因为RGB空间中RGB三个通道相关性太高</li>
+<li>细节提取的方法很好，但是本文要弄个简化的低复杂度的</li>
+</ol>
+<p>总得来说的就是性能不差，算法更简</p>
+<h2 id="II-MULTI-SCALE-EXPOSURE-FUSION-IN-YUV-COLOR-SPACE"><a href="#II-MULTI-SCALE-EXPOSURE-FUSION-IN-YUV-COLOR-SPACE" class="headerlink" title="II. MULTI - SCALE EXPOSURE FUSION IN YUV COLOR SPACE"></a>II. MULTI - SCALE EXPOSURE FUSION IN YUV COLOR SPACE</h2><h3 id="A-Construction-of-weighting-map"><a href="#A-Construction-of-weighting-map" class="headerlink" title="A. Construction of weighting map"></a>A. Construction of weighting map</h3><p>在YUV空间构造权重图</p>
+<p>采用对比度C、饱和度S和曝光E三种测量方法来计算LDR图像的加权图。</p>
+<h3 id="B-Multi-scale-exposure-fusion"><a href="#B-Multi-scale-exposure-fusion" class="headerlink" title="B. Multi-scale exposure fusion"></a>B. Multi-scale exposure fusion</h3><p>用金字塔图像融合的方法来进行多尺度融合，其中最高一层金字塔权重图使用高斯滤波平滑，原图使用拉普拉斯金字塔第一层。其它层金字塔则是权重图乘原图。</p>
+<h3 id="C-ROI-exposure-fusion"><a href="#C-ROI-exposure-fusion" class="headerlink" title="C. ROI exposure fusion"></a>C. ROI exposure fusion</h3><p>自己设定亮图和暗图的权重</p>
+<h2 id="III-DETAIL-ENHANCEMENT-OF-EXPOSURE-FUSION-IMAGE"><a href="#III-DETAIL-ENHANCEMENT-OF-EXPOSURE-FUSION-IMAGE" class="headerlink" title="III. DETAIL ENHANCEMENT OF EXPOSURE FUSION IMAGE"></a>III. DETAIL ENHANCEMENT OF EXPOSURE FUSION IMAGE</h2><p>构建向量场，然后提取特征，最后特征的指数与图像相乘得到细节提升的融合结果。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/Detection and Separation of Smoke/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -305,6 +590,7 @@
           
             <h1 id="【论文笔记】Detection-and-Separation-of-Smoke-From-Single-Image-Frames"><a href="#【论文笔记】Detection-and-Separation-of-Smoke-From-Single-Image-Frames" class="headerlink" title="【论文笔记】Detection and Separation of Smoke From Single Image Frames"></a>【论文笔记】Detection and Separation of Smoke From Single Image Frames</h1><p>从单帧图像中检测和分离烟雾</p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出一种从单帧图像中检测和分离烟雾的新方法，具体地说，在大气散射模型的基础上，推导了一种成像模型。将框架分离为拟烟分量和拟背景分量，并将其表示为凸优化，分别利用烟雾分量和背景分量的对偶字典求解稀疏表示问题。提出了一种基于稀疏系数级联的特征检测方法。此外，提出了一种基于抠图的方法，将真实烟雾和背景成分从烟雾检测结果中分离出来。大量的检测实验表明，提出的特征明显优于现有的烟雾检测特征。特别地，该方法能够在灰度框架中区分具有相似视觉外观的其他具有挑战性的对象(如雾/霾、云等)。烟气分离实验也证明了该方法的有效性。</p>
+<p><font color="#dd0000">浅红色文字：</font><br> </p>
 <h2 id="3-SMOKE-DETECTION-BY-DUAL-DICTIONARY-MODELING"><a href="#3-SMOKE-DETECTION-BY-DUAL-DICTIONARY-MODELING" class="headerlink" title="3.SMOKE  DETECTION  BY  DUAL-DICTIONARY  MODELING"></a>3.SMOKE  DETECTION  BY  DUAL-DICTIONARY  MODELING</h2><p>烟雾检测的对偶字典模型</p>
 <h3 id="A-Physics-Based-Image-Formation-Model-基于物理的图像形成模型"><a href="#A-Physics-Based-Image-Formation-Model-基于物理的图像形成模型" class="headerlink" title="A. Physics-Based Image Formation Model 基于物理的图像形成模型"></a>A. Physics-Based Image Formation Model 基于物理的图像形成模型</h3><p><img src="http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard.png" alt="img"></p>
 <p>这个是基于物理的模型，参数很多，不是很重要，B(x)是背景或称无烟雾部分，S(x)是前景的烟雾。</p>
@@ -557,7 +843,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

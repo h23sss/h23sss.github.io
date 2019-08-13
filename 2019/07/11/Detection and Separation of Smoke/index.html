@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard6.png">
 <meta property="og:image" content="http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard7.png">
 <meta property="og:image" content="http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard8.png">
-<meta property="og:updated_time" content="2019-07-30T06:04:33.908Z">
+<meta property="og:updated_time" content="2019-08-01T06:11:18.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Detection and Separation of Smoke From Single Image Frames">
 <meta name="twitter:description" content="【论文笔记】Detection and Separation of Smoke From Single Image Frames从单帧图像中检测和分离烟雾 摘要文章提出一种从单帧图像中检测和分离烟雾的新方法，具体地说，在大气散射模型的基础上，推导了一种成像模型。将框架分离为拟烟分量和拟背景分量，并将其表示为凸优化，分别利用烟雾分量和背景分量的对偶字典求解稀疏表示问题。提出了一种基于稀疏系数级联的特">
@@ -311,6 +311,7 @@
       
         <h1 id="【论文笔记】Detection-and-Separation-of-Smoke-From-Single-Image-Frames"><a href="#【论文笔记】Detection-and-Separation-of-Smoke-From-Single-Image-Frames" class="headerlink" title="【论文笔记】Detection and Separation of Smoke From Single Image Frames"></a>【论文笔记】Detection and Separation of Smoke From Single Image Frames</h1><p>从单帧图像中检测和分离烟雾</p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出一种从单帧图像中检测和分离烟雾的新方法，具体地说，在大气散射模型的基础上，推导了一种成像模型。将框架分离为拟烟分量和拟背景分量，并将其表示为凸优化，分别利用烟雾分量和背景分量的对偶字典求解稀疏表示问题。提出了一种基于稀疏系数级联的特征检测方法。此外，提出了一种基于抠图的方法，将真实烟雾和背景成分从烟雾检测结果中分离出来。大量的检测实验表明，提出的特征明显优于现有的烟雾检测特征。特别地，该方法能够在灰度框架中区分具有相似视觉外观的其他具有挑战性的对象(如雾/霾、云等)。烟气分离实验也证明了该方法的有效性。</p>
+<p><font color="#dd0000">浅红色文字：</font><br> </p>
 <h2 id="3-SMOKE-DETECTION-BY-DUAL-DICTIONARY-MODELING"><a href="#3-SMOKE-DETECTION-BY-DUAL-DICTIONARY-MODELING" class="headerlink" title="3.SMOKE  DETECTION  BY  DUAL-DICTIONARY  MODELING"></a>3.SMOKE  DETECTION  BY  DUAL-DICTIONARY  MODELING</h2><p>烟雾检测的对偶字典模型</p>
 <h3 id="A-Physics-Based-Image-Formation-Model-基于物理的图像形成模型"><a href="#A-Physics-Based-Image-Formation-Model-基于物理的图像形成模型" class="headerlink" title="A. Physics-Based Image Formation Model 基于物理的图像形成模型"></a>A. Physics-Based Image Formation Model 基于物理的图像形成模型</h3><p><img src="http://pveky4pnl.bkt.clouddn.com/blog/papernote/clipboard.png" alt="img"></p>
 <p>这个是基于物理的模型，参数很多，不是很重要，B(x)是背景或称无烟雾部分，S(x)是前景的烟雾。</p>
@@ -360,6 +361,30 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="csx Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -383,6 +408,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/19/Detail-enhanced Multi-scale Exposure Fusion in YUV space/" rel="prev" title="Detail-enhanced Multi-scale Exposure Fusion in YUV Color Space">
+                Detail-enhanced Multi-scale Exposure Fusion in YUV Color Space <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -459,7 +488,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
